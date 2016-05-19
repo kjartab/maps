@@ -21,14 +21,35 @@
       - { name: 'python-apt' }
       - { name: 'git' }
 
-  - name: gdal repo
-    apt_repository: repo='deb http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu trusty main' state=present
+  # - name: gdal repo
+  #   apt_repository: repo='deb http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu trusty main' state=present
 
-  - name: gdal install
-    apt: name=gdal-bin state=present
+  # - name: gdal install
+  #   apt: name=gdal-bin state=present
+  - name: Download and unzip GDAL
+    unarchive: src=http://download.osgeo.org/gdal/2.1.0/gdal-2.1.0.tar.gz dest={{ project_dir }} copy=no
+  # - name: install gdal 2.1
+    
+
+#- name: Installing FFMPEG
+  # - name: Running ./configure for GDAL
+  #   command: '"{{ item }}" chdir=/myhome/ffmpeg-2.8.2/'
+  #   with_items:
+  #     - ./configure
+  # - name: Running "make" for GDAL
+  #   command: '"{{ item }}" chdir=/myhome/ffmpeg-2.8.2/'
+  #   with_items:
+  #     - make
+  # - name: Running "make install" for GDAL
+  #   command: 'make install chdir=/myhome/ffmpeg-2.8.2/'
+
+
+
+
+
   - name: install zlib
     apt: name=zlib1g-dev state=present
-  # - name: get ctb-tiler
-  #   git: repo=https://github.com/geo-data/cesium-terrain-builder force=yes update=yes dest={{project_dir}}/cesium-terrain-builder accept_hostkey=True
+  - name: get ctb-tiler
+    git: repo=https://github.com/geo-data/cesium-terrain-builder force=yes update=yes dest={{project_dir}}/cesium-terrain-builder accept_hostkey=True
 
   # 
