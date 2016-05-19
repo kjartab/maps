@@ -7,7 +7,7 @@
     project_name: maps
     search_server: www.search.kartan.no
     project_dir: home/{{remote_user}}/{{project_name}}
-  roles:
+  # roles:
     - 
     # - elasticsearch 
     # - node
@@ -20,7 +20,8 @@
 
   - name: gdal repo
     apt_repository: repo='deb ppa:ubuntugis/ubuntugis-unstable' state=present
-    
+  # - name: install zlib
+  #   apt: name=zlib1g-dev state=present
   # - name: get ctb-tiler
   #   git: repo=https://github.com/geo-data/cesium-terrain-builder force=yes update=yes dest={{project_dir}}/cesium-terrain-builder accept_hostkey=True
 
