@@ -22,7 +22,7 @@
       - { name: 'git' }
 
   - name: gdal repo
-    apt_repository: repo='deb ppa:ubuntugis/ubuntugis-unstable' state=present
+    apt_repository: repo='ppa:ubuntugis/ubuntugis-unstable' state=present
 
   # - name: gdal install
   #   apt
