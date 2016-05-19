@@ -34,23 +34,28 @@
   # - name: install gdal 2.1
     
 
-#- name: Installing ffmpeg-2
+#- name: Installing GDAL
   - name: Running ./configure for GDAL
     command: '"{{ item }}" chdir=/home/{{ remote_user }}/gdal-2.1.0/'
     with_items:
       - ./configure
+    when: 
+
   - name: Running "make" for GDAL
     command: '"{{ item }}" chdir=/home/{{ remote_user }}/gdal-2.1.0/'
     with_items:
       - make
   - name: Running "make install" for GDAL
     command: 'make install chdir=/home/{{ remote_user }}/gdal-2.1.0/'
+    notify:
+    - run ldconfig
 
 
   - name: get ctb-tiler
     git: repo=https://github.com/geo-data/cesium-terrain-builder force=yes update=yes dest={{project_dir}}/cesium-terrain-builder accept_hostkey=True
 
 
+  handlers:
+    - name: run ldconfig
+      action: command /sbin/ldconfig
 
-
-  # 
