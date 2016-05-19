@@ -8,7 +8,7 @@
     search_server: www.search.kartan.no
     project_dir: home/{{remote_user}}/{{project_name}}
   # roles:
-    - 
+    # - 
     # - elasticsearch 
     # - node
   tasks:
