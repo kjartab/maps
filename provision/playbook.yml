@@ -49,9 +49,6 @@
       - make
     when: install_gdal
 
-  - name: Check for ctb installation
-    command: ctb-tile
-    register: result.stdout | grep -q ''
 
 
   - name: Check for GDAL installation
