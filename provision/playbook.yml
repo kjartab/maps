@@ -14,12 +14,18 @@
   tasks:
   - name: apt get update
     apt: update_cache=yes
-  - name: install git
-    apt: name=git state=present
-
+  - name: install basic requirements
+    apt: name={{ item.name }} state=present
+    with_items:
+      - { name: 'build-essential' }
+      - { name: 'python-apt' }
+      - { name: 'git' }
 
   - name: gdal repo
     apt_repository: repo='deb ppa:ubuntugis/ubuntugis-unstable' state=present
+
+  # - name: gdal install
+  #   apt
   # - name: install zlib
   #   apt: name=zlib1g-dev state=present
   # - name: get ctb-tiler
