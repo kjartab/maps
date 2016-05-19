@@ -62,8 +62,6 @@
   - name: get ctb-tiler
     git: repo=https://github.com/geo-data/cesium-terrain-builder force=yes update=yes dest={{project_dir}}/cesium-terrain-builder accept_hostkey=True
 
-  - name: 22
-
   handlers:
     - name: run ldconfig
       action: command /sbin/ldconfig
