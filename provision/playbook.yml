@@ -27,17 +27,15 @@
 
   - name: install zlib
     apt: name=zlib1g-dev state=present
-  # - name: gdal install
-  #   apt: name=gdal-bin state=present
-  - name: Download and unzip GDAL
-    unarchive: src=http://download.osgeo.org/gdal/2.1.0/gdal-2.1.0.tar.gz dest=/home/{{ remote_user }} copy=no
-  # - name: install gdal 2.1
-  - name: install rpm
-    apt: name=rpm state=present
-
+  
+  
   - name: Check if GDAL is installed
     command: ogrinfo --version
     register: ogrinfo_output
+
+  - name: Download and unzip GDAL
+    unarchive: src=http://download.osgeo.org/gdal/2.1.0/gdal-2.1.0.tar.gz dest=/home/{{ remote_user }} copy=no
+    when: ogrinfo_output.stdout.find('GDAL') != 1
 
 #- name: Installing GDAL
   - name: Running ./configure for GDAL
@@ -51,6 +49,7 @@
     with_items:
       - make
     when: ogrinfo_output.stdout.find('GDAL') != 1
+
   - name: Running "make install" for GDAL
     command: 'make install chdir=/home/{{ remote_user }}/gdal-2.1.0/'
     when: ogrinfo_output.stdout.find('GDAL') != 1
