@@ -7,7 +7,6 @@
     remote_user: vagrant
     project_name: maps
     search_server: www.search.kartan.no
-    install_gdal: false
     project_dir: /home/{{remote_user}}/{{project_name}}
   # roles:
     # - 
@@ -42,21 +41,22 @@
     command: '"{{ item }}" chdir=/home/{{ remote_user }}/gdal-2.1.0/'
     with_items:
       - ./configure
-    when: {{ install_gdal }}
+    when: {{remote_user}} != vagrant
     # when: ogrinfo_output.stdout.find('GDAL') != 1
 
   - name: Running "make" for GDAL
     command: '"{{ item }}" chdir=/home/{{ remote_user }}/gdal-2.1.0/'
     with_items:
       - make
-    when: {{ install_gdal }}
+    when: false
     # when: ogrinfo_output.stdout.find('GDAL') != 1
 
   - name: Running "make install" for GDAL
     command: 'make install chdir=/home/{{ remote_user }}/gdal-2.1.0/'
+    when: false
+    # when: ogrinfo_output.stdout.find('GDAL') != 1
     notify:
     - run ldconfig
-    when: {{ install_gdal }}
 
   # Installing CTB Tiler
   - name: get ctb-tiler
