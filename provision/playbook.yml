@@ -21,6 +21,10 @@
       - { name: 'python-apt' }
       - { name: 'git' }
 
+  - name: ubuntugis key
+    apt_key: 
+      url='ppa:ubuntugis/ubuntugis-unstable' 
+      state=present
   - name: gdal repo
     become: yes
     apt_repository: repo='ppa:ubuntugis/ubuntugis-unstable' state=present
