@@ -36,7 +36,7 @@
 
   - name: Download and unzip GDAL
     unarchive: src=http://download.osgeo.org/gdal/2.1.0/gdal-2.1.0.tar.gz dest=/home/{{ remote_user }} copy=no
-    when: ogrinfo_output.stdout.find('GDAL') != 1
+    when: install_gdal
 
   - name: Running ./configure for GDAL
     command: '"{{ item }}" chdir=/home/{{ remote_user }}/gdal-2.1.0/'
@@ -49,12 +49,12 @@
     command: '"{{ item }}" chdir=/home/{{ remote_user }}/gdal-2.1.0/'
     with_items:
       - make
-    when: false
+    when: install_gdal
     # when: ogrinfo_output.stdout.find('GDAL') != 1
 
   - name: Running "make install" for GDAL
     command: 'make install chdir=/home/{{ remote_user }}/gdal-2.1.0/'
-    when: false
+    when: install_gdal
     # when: ogrinfo_output.stdout.find('GDAL') != 1
     notify:
     - run ldconfig
