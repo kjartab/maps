@@ -6,6 +6,7 @@
   vars:
     remote_user: vagrant
     project_name: maps
+    install_ctb_tiler: false
     install_gdal: false
     search_server: www.search.kartan.no
     project_dir: /home/{{remote_user}}/{{project_name}}
@@ -30,10 +31,6 @@
     apt: name=zlib1g-dev state=present
 
    # Installing GDAL if necessary
-  - name: Check if GDAL is installed
-    command: ogrinfo --version
-    register: ogrinfo_output
-
   - name: Download and unzip GDAL
     unarchive: src=http://download.osgeo.org/gdal/2.1.0/gdal-2.1.0.tar.gz dest=/home/{{ remote_user }} copy=no
     when: install_gdal
@@ -43,25 +40,35 @@
     with_items:
       - ./configure
     when: install_gdal
-    # when: ogrinfo_output.stdout.find('GDAL') != 1
+
 
   - name: Running "make" for GDAL
     command: '"{{ item }}" chdir=/home/{{ remote_user }}/gdal-2.1.0/'
     with_items:
       - make
     when: install_gdal
-    # when: ogrinfo_output.stdout.find('GDAL') != 1
+
 
   - name: Running "make install" for GDAL
     command: 'make install chdir=/home/{{ remote_user }}/gdal-2.1.0/'
     when: install_gdal
-    # when: ogrinfo_output.stdout.find('GDAL') != 1
     notify:
     - run ldconfig
 
   # Installing CTB Tiler
   - name: get ctb-tiler
     git: repo=https://github.com/geo-data/cesium-terrain-builder force=yes update=yes dest={{project_dir}}/cesium-terrain-builder accept_hostkey=True
+
+  - name: Build directory CTB Tiler
+    file: path={{project_dir}}/cesium-terrain-builder/build state=directory
+
+  - name: Running ./configure for CTB-Tiler
+    command: '"cmake .." chdir={{project_dir}}/cesium-terrain-builder/build'
+    when: install_ctb_tiler
+
+  - name: Running "make install" for CTB-Tiler
+    command: 'make install chdir={{project_dir}}/cesium-terrain-builder/build'
+    when: install_ctb_tiler
 
   handlers:
     - name: run ldconfig
