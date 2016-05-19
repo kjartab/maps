@@ -64,11 +64,11 @@
     file: path='/home/{{ remote_user }}/maps/cesium-terrain-builder/build' state=directory
 
   - name: Running ./configure for CTB-Tiler
-    command: '"cmake .." chdir=/home/{{ remote_user }}/maps/cesium-terrain-builder/build/'
+    command: 'cmake .. chdir=/home/{{ remote_user }}/maps/cesium-terrain-builder/build/'
     when: install_ctb_tiler
 
   - name: Running "make install" for CTB-Tiler
-    command: '"cmake .." chdir=/home/{{ remote_user }}/maps/cesium-terrain-builder/build/'
+    command: 'make install chdir=/home/{{ remote_user }}/maps/cesium-terrain-builder/build/'
     when: install_ctb_tiler
 
   handlers:
