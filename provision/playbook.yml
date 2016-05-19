@@ -1,6 +1,6 @@
 ---
 - name: maps
-  hosts: map_server
+  hosts: all
   become: yes
   remote_user: ansible
   vars:
