@@ -6,7 +6,7 @@
   vars:
     remote_user: vagrant
     project_name: maps
-    install_ctb_tiler: false
+    install_ctb_tiler: true
     install_gdal: false
     search_server: www.search.kartan.no
     project_dir: /home/{{remote_user}}/{{project_name}}
