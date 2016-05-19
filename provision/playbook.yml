@@ -61,14 +61,14 @@
     git: repo=https://github.com/geo-data/cesium-terrain-builder force=yes update=yes dest={{project_dir}}/cesium-terrain-builder accept_hostkey=True
 
   - name: Build directory CTB Tiler
-    file: path='/home/{{ remote_user }}/maps/cesium-terrain-builder/build' state=directory
+    file: path={{project_dir}}/cesium-terrain-builder/build state=directory
 
   - name: Running ./configure for CTB-Tiler
-    command: 'cmake .. chdir=/home/{{ remote_user }}/maps/cesium-terrain-builder/build/'
+    command: 'cmake .. chdir={{project_dir}}/cesium-terrain-builder/build'
     when: install_ctb_tiler
 
   - name: Running "make install" for CTB-Tiler
-    command: 'make install chdir=/home/{{ remote_user }}/maps/cesium-terrain-builder/build/'
+    command: 'make install chdir={{project_dir}}/cesium-terrain-builder/build'
     when: install_ctb_tiler
 
   handlers:
