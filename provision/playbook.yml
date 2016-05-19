@@ -7,7 +7,7 @@
     remote_user: vagrant
     project_name: maps
     search_server: www.search.kartan.no
-    project_dir: home/{{remote_user}}/{{project_name}}
+    project_dir: /home/{{remote_user}}/{{project_name}}
   # roles:
     # - 
     # - elasticsearch 
@@ -28,7 +28,7 @@
   # - name: gdal install
   #   apt: name=gdal-bin state=present
   - name: Download and unzip GDAL
-    unarchive: src=http://download.osgeo.org/gdal/2.1.0/gdal-2.1.0.tar.gz dest=home/{{ remote_user }} copy=no
+    unarchive: src=http://download.osgeo.org/gdal/2.1.0/gdal-2.1.0.tar.gz dest=/home/{{ remote_user }} copy=no
   # - name: install gdal 2.1
     
 
