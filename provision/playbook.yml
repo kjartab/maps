@@ -6,7 +6,7 @@
   vars:
     remote_user: vagrant
     project_name: maps
-    install_ctb_tiler: true
+    install_ctb_tiler: false
     install_gdal: false
     search_server: www.search.kartan.no
     project_dir: /home/{{remote_user}}/{{project_name}}
@@ -49,6 +49,14 @@
       - make
     when: install_gdal
 
+  - name: Check for ctb installation
+    command: ctb-tile
+    register: result.stdout | grep -q ''
+
+
+  - name: Check for GDAL installation
+    command: ogrinfo --version
+    register: result.stdout | grep -q 'not installed'
 
   - name: Running "make install" for GDAL
     command: 'make install chdir=/home/{{ remote_user }}/gdal-2.1.0/'
