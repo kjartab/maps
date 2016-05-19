@@ -1,0 +1,18 @@
+---
+- name: maps
+  hosts: map_server
+  become: yes
+  remote_user: ansible
+  vars:
+    project_name: maps
+    search_server: www.search.kartan.no
+    project_dir: home/{{remote_user}}/{{project_name}}
+  roles:
+    - 
+    # - elasticsearch 
+    # - node
+  tasks:
+  - name: get ctb-tiler
+    git: repo=https://github.com/geo-data/cesium-terrain-builder force=yes update=yes dest={{project_dir}}/cesium-terrain-builder accept_hostkey=True
+  - name
+  
