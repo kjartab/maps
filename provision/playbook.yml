@@ -12,7 +12,16 @@
     # - elasticsearch 
     # - node
   tasks:
-  - name: get ctb-tiler
-    git: repo=https://github.com/geo-data/cesium-terrain-builder force=yes update=yes dest={{project_dir}}/cesium-terrain-builder accept_hostkey=True
-  - name
-  
+  - name: apt get update
+    apt: update_cache=yes
+  - name: install git
+    apt: name=git state=present
+
+
+  - name: gdal repo
+    apt_repository: repo='deb ppa:ubuntugis/ubuntugis-unstable' state=present
+    
+  # - name: get ctb-tiler
+  #   git: repo=https://github.com/geo-data/cesium-terrain-builder force=yes update=yes dest={{project_dir}}/cesium-terrain-builder accept_hostkey=True
+
+  # 
