@@ -26,7 +26,6 @@
       url='ppa:ubuntugis/ubuntugis-unstable' 
       state=present
   - name: gdal repo
-    become: yes
     apt_repository: repo='ppa:ubuntugis/ubuntugis-unstable' state=present
 
   # - name: gdal install
