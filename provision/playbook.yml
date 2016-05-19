@@ -20,13 +20,9 @@
       - { name: 'build-essential' }
       - { name: 'python-apt' }
       - { name: 'git' }
-
-  - name: ubuntugis key
-    apt_key: 
-      url='ppa:ubuntugis/ubuntugis-unstable' 
-      state=present
+      
   - name: gdal repo
-    apt_repository: repo='ppa:ubuntugis/ubuntugis-unstable' state=present
+    apt_repository: repo='deb http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu trusty main' state=present
 
   # - name: gdal install
   #   apt
