@@ -23,6 +23,7 @@
       - { name: 'build-essential' }
       - { name: 'python-apt' }
       - { name: 'git' }
+      - { name: 'cmake' }
 
   # - name: gdal repo
   #   apt_repository: repo='deb http://ppa.launchpad.net/ubuntugis/ubuntugis-unstable/ubuntu trusty main' state=present
