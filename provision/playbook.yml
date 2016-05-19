@@ -41,7 +41,7 @@
     command: '"{{ item }}" chdir=/home/{{ remote_user }}/gdal-2.1.0/'
     with_items:
       - ./configure
-    when: {{remote_user}} != vagrant
+    when: "{{remote_user}}" != vagrant
     # when: ogrinfo_output.stdout.find('GDAL') != 1
 
   - name: Running "make" for GDAL
